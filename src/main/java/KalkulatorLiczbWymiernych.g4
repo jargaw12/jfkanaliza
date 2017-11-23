@@ -1,5 +1,8 @@
 grammar KalkulatorLiczbWymiernych;
 
+//nie wiem co to ale wazne
+start_rule: <wazneDzialazTym>;
+
 wyrazenie:
            <assoc=right> wyrazenie(Potega)Licznik
            |wyrazenie(Mnozenie|Dzielenie)wyrazenie
@@ -8,6 +11,7 @@ wyrazenie:
            |operacja1
            |liczba
            |'('wyrazenie')';
+
 
  operacja1    :op=(WartoscBezwzgledna
                             | Podloga
@@ -43,6 +47,5 @@ wyrazenie:
 
 fragment KRESKAULAMKOWA  :   '/';
 fragment MIANOWNIK       :   KRESKAULAMKOWA [0-9]*;
-
 
 
