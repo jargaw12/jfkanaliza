@@ -62,7 +62,8 @@ public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor 
                 break;
             case KalkulatorLiczbWymiernychParser.Sufit:
                 //TODO sufit
-                licznik = (licznik / mianownik) + 1;
+                double ulamek = licznik / mianownik;
+                licznik = (int) Math.ceil(ulamek);
                 mianownik = 1;
                 break;
             case KalkulatorLiczbWymiernychParser.Zaokraglenie:
