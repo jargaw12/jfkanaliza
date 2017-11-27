@@ -1,9 +1,10 @@
-import gen.KalkulatorLiczbWymiernychLexer;
-import gen.KalkulatorLiczbWymiernychParser;
+
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import sda.KalkulatorLiczbWymiernychLexer;
+import sda.KalkulatorLiczbWymiernychParser;
 
 import java.util.Scanner;
 

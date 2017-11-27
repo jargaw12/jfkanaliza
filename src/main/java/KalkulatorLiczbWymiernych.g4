@@ -4,7 +4,7 @@ grammar KalkulatorLiczbWymiernych;
 start_rule: <wazneDzialazTym>;
 
 wyrazenie:
-           <assoc=right> wyrazenie(Potega)Licznik
+           <assoc=right> wyrazenie(Potega)wyrazenie
            |wyrazenie(Mnozenie|Dzielenie)wyrazenie
            |wyrazenie(Modulo|Kongruencja)wyrazenie
            |wyrazenie(Dodawanie|Odejmowanie)wyrazenie
@@ -22,6 +22,7 @@ wyrazenie:
                 |(Max | Min) '('wyrazenie','wyrazenie')';
 
  liczba: LICZBA;
+ potega :Licznik;
 
  Dodawanie   :   '+';
  Odejmowanie :   '-';
@@ -32,7 +33,7 @@ wyrazenie:
  Podloga     :   'p';
  Sufit       :   's';
  Zaokraglenie    :   'z';
- Negacja     :   '~';
+ Negacja     :   '!';
  Kongruencja :   'k';
  Potega      :   '^';
  Pierwiastek :   'sqrt';

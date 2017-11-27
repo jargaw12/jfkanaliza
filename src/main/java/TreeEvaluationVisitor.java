@@ -1,5 +1,5 @@
-import gen.KalkulatorLiczbWymiernychBaseVisitor;
-import gen.KalkulatorLiczbWymiernychParser;
+import sda.KalkulatorLiczbWymiernychBaseVisitor;
+import sda.KalkulatorLiczbWymiernychParser;
 
 public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor {
 
@@ -21,6 +21,7 @@ public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor 
         }
         return 0;
     }
+
 
     @Override
     public String visitLiczba(KalkulatorLiczbWymiernychParser.LiczbaContext ctx) {
@@ -86,7 +87,7 @@ public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor 
 
     @Override
     public Object visitWyrazenie(KalkulatorLiczbWymiernychParser.WyrazenieContext ctx) {
-        if (ctx.Dodawanie() != null || ctx.Odejmowanie() != null || ctx.Mnozenie() != null || ctx.Dzielenie() != null | ctx.Kongruencja() != null) {
+        if (ctx.Dodawanie() != null || ctx.Odejmowanie() != null || ctx.Mnozenie() != null || ctx.Dzielenie() != null || ctx.Kongruencja() != null || ctx.Modulo()!=null || ctx.Potega()!=null) {
             String[] tokens1 = String.valueOf(visit(ctx.wyrazenie(0))).split("/");
             String[] tokens2 = String.valueOf(visit(ctx.wyrazenie(1))).split("/");
             int licznik = 0;
@@ -115,6 +116,17 @@ public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor 
             if (ctx.Kongruencja() != null) {
                 licznik = (int) (licznik1 * mianownik2) / (mianownik1 * licznik2);
                 mianownik = 1;
+            }
+            if (ctx.Modulo()!= null){
+                int k=(int) (licznik1 * mianownik2) / (mianownik1 * licznik2);
+                licznik = licznik1 * mianownik2 - k*licznik2 * mianownik1;
+                mianownik = mianownik1 * mianownik2;
+
+            }
+            if (ctx.Potega()!=null){
+                licznik= (int) Math.pow(licznik1,licznik2);
+                mianownik= (int) Math.pow(mianownik1,licznik2);
+
             }
             int nwd = nwd(licznik, mianownik);
             if (nwd != 0) {
