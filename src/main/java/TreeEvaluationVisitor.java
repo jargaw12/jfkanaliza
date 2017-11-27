@@ -43,44 +43,50 @@ public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor 
     }
 
     @Override
-    public String visitOperacja1(KalkulatorLiczbWymiernychParser.Operacja1Context ctx) {
-        String[] tokens = String.valueOf(visit(ctx.wyrazenie(0))).split("/");
-        int licznik = Integer.parseInt(tokens[0]);
-        int mianownik = Integer.parseInt(tokens[1]);
-        switch (ctx.op.getType()) {
+    public Object visitOperacja1(KalkulatorLiczbWymiernychParser.Operacja1Context ctx) {
+            String[] tokens = String.valueOf(visit(ctx.liczba())).split("/");
+             int licznik = Integer.parseInt(tokens[0]);
+             int mianownik = Integer.parseInt(tokens[1]);
+            switch (ctx.op.getType()) {
 //                case gramatykaParser.Pierwiastek:
 //                    result = Math.sqrt(Double.valueOf(String.valueOf(visitChildren(ctx))));
 //                    out += result;
 //                    break;
-            case KalkulatorLiczbWymiernychParser.WartoscBezwzgledna:
-                licznik = Math.abs(licznik);
-                mianownik = Math.abs(mianownik);
-                break;
-            case KalkulatorLiczbWymiernychParser.Podloga:
-                licznik = licznik / mianownik;
-                mianownik = 1;
-                break;
-            case KalkulatorLiczbWymiernychParser.Sufit:
-                //TODO sufit
-                double ulamek = licznik / mianownik;
-                licznik = (int) Math.ceil(ulamek);
-                mianownik = 1;
-                break;
-            case KalkulatorLiczbWymiernychParser.Zaokraglenie:
-                licznik = Math.round(licznik / mianownik);
-                mianownik = 1;
-                break;
-            case KalkulatorLiczbWymiernychParser.Negacja:
-                if (mianownik < 0) mianownik = -mianownik;
-                else licznik = -licznik;
-                break;
-        }
-        return licznik + "/" + mianownik;
+                case KalkulatorLiczbWymiernychParser.WartoscBezwzgledna:
+                    licznik = Math.abs(licznik);
+                    mianownik = Math.abs(mianownik);
+                    break;
+                case KalkulatorLiczbWymiernychParser.Podloga:
+                    licznik = licznik / mianownik;
+                    mianownik = 1;
+                    break;
+                case KalkulatorLiczbWymiernychParser.Sufit:
+                    double ulamek = ((double)licznik / (double) mianownik);
+                    licznik = (int) Math.ceil(ulamek);
+                    mianownik = 1;
+                    break;
+                case KalkulatorLiczbWymiernychParser.Zaokraglenie:
+                    licznik = Math.round(licznik / mianownik);
+                    mianownik = 1;
+                    break;
+                case KalkulatorLiczbWymiernychParser.Negacja:
+                    if (mianownik < 0) mianownik = -mianownik;
+                    else licznik = -licznik;
+                    break;
+//                case KalkulatorLiczbWymiernychParser.Modulo:
+//                    String[] tokens2 = String.valueOf(visit(ctx.wyrazenie(1))).split("/");
+//                    int licznik2 = Integer.parseInt(tokens[0]);
+//                    int mianownik2 = Integer.parseInt(tokens[1]);
+//                    Math.floorMod(1,2)
+//
+//                    break;
+            }
+            return licznik + "/" + mianownik;
     }
 
     @Override
     public Object visitWyrazenie(KalkulatorLiczbWymiernychParser.WyrazenieContext ctx) {
-        if (ctx.Dodawanie() != null || ctx.Odejmowanie() != null || ctx.Mnozenie() != null || ctx.Dzielenie() != null) {
+        if (ctx.Dodawanie() != null || ctx.Odejmowanie() != null || ctx.Mnozenie() != null || ctx.Dzielenie() != null | ctx.Kongruencja() != null) {
             String[] tokens1 = String.valueOf(visit(ctx.wyrazenie(0))).split("/");
             String[] tokens2 = String.valueOf(visit(ctx.wyrazenie(1))).split("/");
             int licznik = 0;
@@ -105,6 +111,10 @@ public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor 
             if (ctx.Dzielenie() != null) {
                 licznik = licznik1 * mianownik2;
                 mianownik = mianownik1 * licznik2;
+            }
+            if (ctx.Kongruencja() != null) {
+                licznik = (int) (licznik1 * mianownik2) / (mianownik1 * licznik2);
+                mianownik = 1;
             }
             int nwd = nwd(licznik, mianownik);
             if (nwd != 0) {
