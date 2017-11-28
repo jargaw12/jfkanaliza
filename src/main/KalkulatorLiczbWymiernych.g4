@@ -2,7 +2,7 @@ grammar KalkulatorLiczbWymiernych;
 
 //nie wiem co to ale wazne
 start_rule: <wazneDzialazTym>;
-
+//definicja wyrażenia
 wyrazenie:
            <assoc=right> wyrazenie(Potega)wyrazenie
            |wyrazenie(Mnozenie|Dzielenie)wyrazenie
@@ -12,7 +12,7 @@ wyrazenie:
            |liczba
            |'('wyrazenie')';
 
-
+//operacje jednoargumentowe
  operacja1    :op=(WartoscBezwzgledna
                             | Podloga
                             | Sufit
@@ -24,6 +24,7 @@ wyrazenie:
  liczba: LICZBA;
  potega :Licznik;
 
+//oznaczenie poszczególnych funkcji
  Dodawanie   :   '+';
  Odejmowanie :   '-';
  Mnozenie    :   '*';
@@ -40,13 +41,17 @@ wyrazenie:
  Max         :   'max';
  Min         :   'min';
 
+//definicja liczby(może to być sam licznik(czyli liczba całkowita) albo ułamek(licznik'/'mianownik)
  LICZBA      :   Licznik |   Ulamek ;
 
+//ignorowanie znaków białych
  WS : [ \t\r\n]+ -> skip ;
- Licznik     :   '0'   |     [1-9]+ [0-9]*;
+ //definicja licznika
+ Licznik     :   '0'   |[\\-]?     [1-9]+ [0-9]*;
+ //definicja ułamka(licznik obligatoryjny, mianownik opcjonalny
  Ulamek      :   Licznik MIANOWNIK?;
 
 fragment KRESKAULAMKOWA  :   '/';
-fragment MIANOWNIK       :   KRESKAULAMKOWA [0-9]*;
+fragment MIANOWNIK       :   KRESKAULAMKOWA [1-9]+ [0-9]*;
 
 
