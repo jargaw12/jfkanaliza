@@ -1,5 +1,5 @@
-import sda.KalkulatorLiczbWymiernychBaseVisitor;
-import sda.KalkulatorLiczbWymiernychParser;
+import gen.KalkulatorLiczbWymiernychBaseVisitor;
+import gen.KalkulatorLiczbWymiernychParser;
 
 public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor {
 
@@ -19,13 +19,13 @@ public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor 
             while (a != b);
             return a;
         }
-        return 0;
+        return a;
     }
 
 
     @Override
     public String visitLiczba(KalkulatorLiczbWymiernychParser.LiczbaContext ctx) {
-        String[] tokens = String.valueOf(ctx.getChild(0)).split("/");
+        String[] tokens = String.valueOf(ctx.getChild(0)).replace("(","").replace(")","").split("/");
         int licznik = 0;
         int mianownik = 0;
         if (tokens.length == 1) {
@@ -45,35 +45,45 @@ public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor 
 
     @Override
     public Object visitOperacja1(KalkulatorLiczbWymiernychParser.Operacja1Context ctx) {
-            String[] tokens = String.valueOf(visit(ctx.liczba())).split("/");
+            String[] tokens = String.valueOf(visit(ctx.wyrazenie(0))).split("/");
              int licznik = Integer.parseInt(tokens[0]);
              int mianownik = Integer.parseInt(tokens[1]);
-            switch (ctx.op.getType()) {
+             if (ctx.op!=null) {
+                 switch (ctx.op.getType()) {
 //                case gramatykaParser.Pierwiastek:
 //                    result = Math.sqrt(Double.valueOf(String.valueOf(visitChildren(ctx))));
 //                    out += result;
 //                    break;
-                case KalkulatorLiczbWymiernychParser.WartoscBezwzgledna:
-                    licznik = Math.abs(licznik);
-                    mianownik = Math.abs(mianownik);
-                    break;
-                case KalkulatorLiczbWymiernychParser.Podloga:
-                    licznik = licznik / mianownik;
-                    mianownik = 1;
-                    break;
-                case KalkulatorLiczbWymiernychParser.Sufit:
-                    double ulamek = ((double)licznik / (double) mianownik);
-                    licznik = (int) Math.ceil(ulamek);
-                    mianownik = 1;
-                    break;
-                case KalkulatorLiczbWymiernychParser.Zaokraglenie:
-                    licznik = Math.round(licznik / mianownik);
-                    mianownik = 1;
-                    break;
-                case KalkulatorLiczbWymiernychParser.Negacja:
-                    if (mianownik < 0) mianownik = -mianownik;
-                    else licznik = -licznik;
-                    break;
+                     case KalkulatorLiczbWymiernychParser.WartoscBezwzgledna:
+                         licznik = Math.abs(licznik);
+                         mianownik = Math.abs(mianownik);
+                         break;
+                     case KalkulatorLiczbWymiernychParser.Podloga:
+                         licznik = licznik / mianownik;
+                         mianownik = 1;
+                         break;
+                     case KalkulatorLiczbWymiernychParser.Sufit:
+                         double ulamek = ((double) licznik / (double) mianownik);
+                         licznik = (int) Math.ceil(ulamek);
+                         mianownik = 1;
+                         break;
+                     case KalkulatorLiczbWymiernychParser.Zaokraglenie:
+                         licznik = Math.round(licznik / mianownik);
+                         mianownik = 1;
+                         break;
+                     case KalkulatorLiczbWymiernychParser.Negacja:
+                         if (mianownik < 0) mianownik = -mianownik;
+                         else licznik = -licznik;
+                         break;
+//                     case KalkulatorLiczbWymiernychParser.Max:
+//                         String[] tokens2 = String.valueOf(visit(ctx.wyrazenie(1))).split("/");
+//                         int licznik2 = Integer.parseInt(tokens[0]);
+//                         int mianownik2 = Integer.parseInt(tokens[1]);
+//                         if ((double) (licznik / mianownik) < (double) (licznik2 / mianownik2)) {
+//                             licznik = licznik2;
+//                             mianownik = mianownik2;
+//                         }
+//                         break;
 //                case KalkulatorLiczbWymiernychParser.Modulo:
 //                    String[] tokens2 = String.valueOf(visit(ctx.wyrazenie(1))).split("/");
 //                    int licznik2 = Integer.parseInt(tokens[0]);
@@ -81,8 +91,30 @@ public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor 
 //                    Math.floorMod(1,2)
 //
 //                    break;
-            }
-            return licznik + "/" + mianownik;
+                 }
+                 return licznik + "/" + mianownik;
+             }
+             if (ctx.opm!=null){
+                 String[] tokens2 = String.valueOf(visit(ctx.wyrazenie(1))).split("/");
+                 int licznik2 = Integer.parseInt(tokens2[0]);
+                 int mianownik2 = Integer.parseInt(tokens2[1]);
+                 switch (ctx.opm.getType()){
+                     case KalkulatorLiczbWymiernychParser.Max:
+                         if (((double)licznik /(double)mianownik) < ((double)licznik2 /(double) mianownik2)) {
+                             licznik = licznik2;
+                             mianownik = mianownik2;
+                         }
+                         break;
+                     case KalkulatorLiczbWymiernychParser.Min:
+                         if (((double)licznik /(double)mianownik) > ((double)licznik2 /(double) mianownik2)) {
+                             licznik = licznik2;
+                             mianownik = mianownik2;
+                         }
+                         break;
+                 }
+                 return licznik + "/" + mianownik;
+             }
+        return visitChildren(ctx);
     }
 
     @Override
@@ -128,6 +160,7 @@ public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor 
                 mianownik= (int) Math.pow(mianownik1,licznik2);
 
             }
+
             int nwd = nwd(licznik, mianownik);
             if (nwd != 0) {
                 licznik = licznik / nwd;

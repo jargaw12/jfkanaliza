@@ -18,8 +18,8 @@ wyrazenie:
                             | Sufit
                             |Zaokraglenie
                             |Negacja
-                            |Pierwiastek) '('(liczba|wyrazenie)')'
-                |(Max | Min) '('wyrazenie','wyrazenie')';
+                            |Pierwiastek) '('(wyrazenie)')'
+                |opm=(Max | Min) '('wyrazenie','wyrazenie')';
 
  liczba: LICZBA;
  potega :Licznik;
@@ -42,14 +42,14 @@ wyrazenie:
  Min         :   'min';
 
 //definicja liczby(może to być sam licznik(czyli liczba całkowita) albo ułamek(licznik'/'mianownik)
- LICZBA      :   Licznik |   Ulamek ;
+ LICZBA      :   Licznik MIANOWNIK? |'(-'Licznik MIANOWNIK?')';
 
 //ignorowanie znaków białych
  WS : [ \t\r\n]+ -> skip ;
  //definicja licznika
- Licznik     :   '0'   |[\\-]?     [1-9]+ [0-9]*;
- //definicja ułamka(licznik obligatoryjny, mianownik opcjonalny
- Ulamek      :   Licznik MIANOWNIK?;
+ Licznik     :   '0'   |     [1-9]+ [0-9]*|'(-'[1-9]+ [0-9]*')';
+  //definicja ułamka(licznik obligatoryjny, mianownik opcjonalny
+ //Ulamek      :   Licznik MIANOWNIK?;
 
 fragment KRESKAULAMKOWA  :   '/';
 fragment MIANOWNIK       :   KRESKAULAMKOWA [1-9]+ [0-9]*;
