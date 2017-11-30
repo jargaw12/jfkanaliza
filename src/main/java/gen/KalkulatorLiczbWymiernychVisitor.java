@@ -11,23 +11,23 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface KalkulatorLiczbWymiernychVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link KalkulatorLiczbWymiernychParser#start_rule}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStart_rule(KalkulatorLiczbWymiernychParser.Start_ruleContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link KalkulatorLiczbWymiernychParser#wyrazenie}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitWyrazenie(KalkulatorLiczbWymiernychParser.WyrazenieContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link KalkulatorLiczbWymiernychParser#operacja1}.
+	 * Visit a parse tree produced by {@link KalkulatorLiczbWymiernychParser#funkcja1}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOperacja1(KalkulatorLiczbWymiernychParser.Operacja1Context ctx);
+	T visitFunkcja1(KalkulatorLiczbWymiernychParser.Funkcja1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link KalkulatorLiczbWymiernychParser#funkcja2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunkcja2(KalkulatorLiczbWymiernychParser.Funkcja2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link KalkulatorLiczbWymiernychParser#liczba}.
 	 * @param ctx the parse tree

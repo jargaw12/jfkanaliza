@@ -22,10 +22,10 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 		Negacja=13, Kongruencja=14, Potega=15, Pierwiastek=16, Max=17, Min=18, 
 		LICZBA=19, WS=20, Licznik=21;
 	public static final int
-		RULE_start_rule = 0, RULE_wyrazenie = 1, RULE_operacja1 = 2, RULE_liczba = 3, 
+		RULE_wyrazenie = 0, RULE_funkcja1 = 1, RULE_funkcja2 = 2, RULE_liczba = 3, 
 		RULE_potega = 4;
 	public static final String[] ruleNames = {
-		"start_rule", "wyrazenie", "operacja1", "liczba", "potega"
+		"wyrazenie", "funkcja1", "funkcja2", "liczba", "potega"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -87,40 +87,12 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
-	public static class Start_ruleContext extends ParserRuleContext {
-		public Start_ruleContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_start_rule; }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof KalkulatorLiczbWymiernychVisitor ) return ((KalkulatorLiczbWymiernychVisitor<? extends T>)visitor).visitStart_rule(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final Start_ruleContext start_rule() throws RecognitionException {
-		Start_ruleContext _localctx = new Start_ruleContext(_ctx, getState());
-		enterRule(_localctx, 0, RULE_start_rule);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
 	public static class WyrazenieContext extends ParserRuleContext {
-		public Operacja1Context operacja1() {
-			return getRuleContext(Operacja1Context.class,0);
+		public Funkcja1Context funkcja1() {
+			return getRuleContext(Funkcja1Context.class,0);
+		}
+		public Funkcja2Context funkcja2() {
+			return getRuleContext(Funkcja2Context.class,0);
 		}
 		public LiczbaContext liczba() {
 			return getRuleContext(LiczbaContext.class,0);
@@ -158,14 +130,14 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 		int _parentState = getState();
 		WyrazenieContext _localctx = new WyrazenieContext(_ctx, _parentState);
 		WyrazenieContext _prevctx = _localctx;
-		int _startState = 2;
-		enterRecursionRule(_localctx, 2, RULE_wyrazenie, _p);
+		int _startState = 0;
+		enterRecursionRule(_localctx, 0, RULE_wyrazenie, _p);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(19);
+			setState(18);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case WartoscBezwzgledna:
@@ -174,26 +146,31 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 			case Zaokraglenie:
 			case Negacja:
 			case Pierwiastek:
+				{
+				setState(11);
+				funkcja1();
+				}
+				break;
 			case Max:
 			case Min:
 				{
-				setState(13);
-				operacja1();
+				setState(12);
+				funkcja2();
 				}
 				break;
 			case LICZBA:
 				{
-				setState(14);
+				setState(13);
 				liczba();
 				}
 				break;
 			case T__0:
 				{
-				setState(15);
+				setState(14);
 				match(T__0);
-				setState(16);
+				setState(15);
 				wyrazenie(0);
-				setState(17);
+				setState(16);
 				match(T__1);
 				}
 				break;
@@ -201,7 +178,7 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(35);
+			setState(34);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -209,30 +186,30 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(33);
+					setState(32);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 					case 1:
 						{
 						_localctx = new WyrazenieContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_wyrazenie);
-						setState(21);
-						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
+						setState(20);
+						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
 						{
-						setState(22);
+						setState(21);
 						match(Potega);
 						}
-						setState(23);
-						wyrazenie(7);
+						setState(22);
+						wyrazenie(8);
 						}
 						break;
 					case 2:
 						{
 						_localctx = new WyrazenieContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_wyrazenie);
+						setState(23);
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(24);
-						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(25);
 						_la = _input.LA(1);
 						if ( !(_la==Mnozenie || _la==Dzielenie) ) {
 						_errHandler.recoverInline(this);
@@ -242,17 +219,17 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(26);
-						wyrazenie(7);
+						setState(25);
+						wyrazenie(8);
 						}
 						break;
 					case 3:
 						{
 						_localctx = new WyrazenieContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_wyrazenie);
+						setState(26);
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(27);
-						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(28);
 						_la = _input.LA(1);
 						if ( !(_la==Modulo || _la==Kongruencja) ) {
 						_errHandler.recoverInline(this);
@@ -262,17 +239,17 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(29);
-						wyrazenie(6);
+						setState(28);
+						wyrazenie(7);
 						}
 						break;
 					case 4:
 						{
 						_localctx = new WyrazenieContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_wyrazenie);
+						setState(29);
+						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
 						setState(30);
-						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(31);
 						_la = _input.LA(1);
 						if ( !(_la==Dodawanie || _la==Odejmowanie) ) {
 						_errHandler.recoverInline(this);
@@ -282,14 +259,14 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(32);
-						wyrazenie(5);
+						setState(31);
+						wyrazenie(6);
 						}
 						break;
 					}
 					} 
 				}
-				setState(37);
+				setState(36);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			}
@@ -306,15 +283,69 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 		return _localctx;
 	}
 
-	public static class Operacja1Context extends ParserRuleContext {
-		public Token op;
-		public Token opm;
+	public static class Funkcja1Context extends ParserRuleContext {
+		public Token f1;
 		public TerminalNode WartoscBezwzgledna() { return getToken(KalkulatorLiczbWymiernychParser.WartoscBezwzgledna, 0); }
 		public TerminalNode Podloga() { return getToken(KalkulatorLiczbWymiernychParser.Podloga, 0); }
 		public TerminalNode Sufit() { return getToken(KalkulatorLiczbWymiernychParser.Sufit, 0); }
 		public TerminalNode Zaokraglenie() { return getToken(KalkulatorLiczbWymiernychParser.Zaokraglenie, 0); }
 		public TerminalNode Negacja() { return getToken(KalkulatorLiczbWymiernychParser.Negacja, 0); }
 		public TerminalNode Pierwiastek() { return getToken(KalkulatorLiczbWymiernychParser.Pierwiastek, 0); }
+		public WyrazenieContext wyrazenie() {
+			return getRuleContext(WyrazenieContext.class,0);
+		}
+		public Funkcja1Context(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_funkcja1; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof KalkulatorLiczbWymiernychVisitor ) return ((KalkulatorLiczbWymiernychVisitor<? extends T>)visitor).visitFunkcja1(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Funkcja1Context funkcja1() throws RecognitionException {
+		Funkcja1Context _localctx = new Funkcja1Context(_ctx, getState());
+		enterRule(_localctx, 2, RULE_funkcja1);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(37);
+			((Funkcja1Context)_localctx).f1 = _input.LT(1);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << WartoscBezwzgledna) | (1L << Podloga) | (1L << Sufit) | (1L << Zaokraglenie) | (1L << Negacja) | (1L << Pierwiastek))) != 0)) ) {
+				((Funkcja1Context)_localctx).f1 = (Token)_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			setState(38);
+			match(T__0);
+			{
+			setState(39);
+			wyrazenie(0);
+			}
+			setState(40);
+			match(T__1);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Funkcja2Context extends ParserRuleContext {
+		public Token f2;
 		public List<WyrazenieContext> wyrazenie() {
 			return getRuleContexts(WyrazenieContext.class);
 		}
@@ -323,83 +354,45 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 		}
 		public TerminalNode Max() { return getToken(KalkulatorLiczbWymiernychParser.Max, 0); }
 		public TerminalNode Min() { return getToken(KalkulatorLiczbWymiernychParser.Min, 0); }
-		public Operacja1Context(ParserRuleContext parent, int invokingState) {
+		public Funkcja2Context(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_operacja1; }
+		@Override public int getRuleIndex() { return RULE_funkcja2; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof KalkulatorLiczbWymiernychVisitor ) return ((KalkulatorLiczbWymiernychVisitor<? extends T>)visitor).visitOperacja1(this);
+			if ( visitor instanceof KalkulatorLiczbWymiernychVisitor ) return ((KalkulatorLiczbWymiernychVisitor<? extends T>)visitor).visitFunkcja2(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Operacja1Context operacja1() throws RecognitionException {
-		Operacja1Context _localctx = new Operacja1Context(_ctx, getState());
-		enterRule(_localctx, 4, RULE_operacja1);
+	public final Funkcja2Context funkcja2() throws RecognitionException {
+		Funkcja2Context _localctx = new Funkcja2Context(_ctx, getState());
+		enterRule(_localctx, 4, RULE_funkcja2);
 		int _la;
 		try {
-			setState(50);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case WartoscBezwzgledna:
-			case Podloga:
-			case Sufit:
-			case Zaokraglenie:
-			case Negacja:
-			case Pierwiastek:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(38);
-				((Operacja1Context)_localctx).op = _input.LT(1);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << WartoscBezwzgledna) | (1L << Podloga) | (1L << Sufit) | (1L << Zaokraglenie) | (1L << Negacja) | (1L << Pierwiastek))) != 0)) ) {
-					((Operacja1Context)_localctx).op = (Token)_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(39);
-				match(T__0);
-				{
-				setState(40);
-				wyrazenie(0);
-				}
-				setState(41);
-				match(T__1);
-				}
-				break;
-			case Max:
-			case Min:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(43);
-				((Operacja1Context)_localctx).opm = _input.LT(1);
-				_la = _input.LA(1);
-				if ( !(_la==Max || _la==Min) ) {
-					((Operacja1Context)_localctx).opm = (Token)_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(44);
-				match(T__0);
-				setState(45);
-				wyrazenie(0);
-				setState(46);
-				match(T__2);
-				setState(47);
-				wyrazenie(0);
-				setState(48);
-				match(T__1);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(42);
+			((Funkcja2Context)_localctx).f2 = _input.LT(1);
+			_la = _input.LA(1);
+			if ( !(_la==Max || _la==Min) ) {
+				((Funkcja2Context)_localctx).f2 = (Token)_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			setState(43);
+			match(T__0);
+			setState(44);
+			wyrazenie(0);
+			setState(45);
+			match(T__2);
+			setState(46);
+			wyrazenie(0);
+			setState(47);
+			match(T__1);
 			}
 		}
 		catch (RecognitionException re) {
@@ -432,7 +425,7 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(52);
+			setState(49);
 			match(LICZBA);
 			}
 		}
@@ -466,7 +459,7 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(54);
+			setState(51);
 			match(Licznik);
 			}
 		}
@@ -483,7 +476,7 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 1:
+		case 0:
 			return wyrazenie_sempred((WyrazenieContext)_localctx, predIndex);
 		}
 		return true;
@@ -491,34 +484,34 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 	private boolean wyrazenie_sempred(WyrazenieContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 7);
+			return precpred(_ctx, 8);
 		case 1:
-			return precpred(_ctx, 6);
+			return precpred(_ctx, 7);
 		case 2:
-			return precpred(_ctx, 5);
+			return precpred(_ctx, 6);
 		case 3:
-			return precpred(_ctx, 4);
+			return precpred(_ctx, 5);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\27;\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\26"+
-		"\n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7\3$\n\3\f\3\16\3"+
-		"\'\13\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4\65\n\4\3\5"+
-		"\3\5\3\6\3\6\3\6\2\3\4\7\2\4\6\b\n\2\7\3\2\b\t\4\2\n\n\20\20\3\2\6\7\4"+
-		"\2\13\17\22\22\3\2\23\24\2<\2\f\3\2\2\2\4\25\3\2\2\2\6\64\3\2\2\2\b\66"+
-		"\3\2\2\2\n8\3\2\2\2\f\r\3\2\2\2\r\3\3\2\2\2\16\17\b\3\1\2\17\26\5\6\4"+
-		"\2\20\26\5\b\5\2\21\22\7\3\2\2\22\23\5\4\3\2\23\24\7\4\2\2\24\26\3\2\2"+
-		"\2\25\16\3\2\2\2\25\20\3\2\2\2\25\21\3\2\2\2\26%\3\2\2\2\27\30\f\t\2\2"+
-		"\30\31\7\21\2\2\31$\5\4\3\t\32\33\f\b\2\2\33\34\t\2\2\2\34$\5\4\3\t\35"+
-		"\36\f\7\2\2\36\37\t\3\2\2\37$\5\4\3\b !\f\6\2\2!\"\t\4\2\2\"$\5\4\3\7"+
-		"#\27\3\2\2\2#\32\3\2\2\2#\35\3\2\2\2# \3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&"+
-		"\3\2\2\2&\5\3\2\2\2\'%\3\2\2\2()\t\5\2\2)*\7\3\2\2*+\5\4\3\2+,\7\4\2\2"+
-		",\65\3\2\2\2-.\t\6\2\2./\7\3\2\2/\60\5\4\3\2\60\61\7\5\2\2\61\62\5\4\3"+
-		"\2\62\63\7\4\2\2\63\65\3\2\2\2\64(\3\2\2\2\64-\3\2\2\2\65\7\3\2\2\2\66"+
-		"\67\7\25\2\2\67\t\3\2\2\289\7\27\2\29\13\3\2\2\2\6\25#%\64";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\278\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\5\2\25\n\2"+
+		"\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\7\2#\n\2\f\2\16\2&\13"+
+		"\2\3\3\3\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\6\3\6\3\6"+
+		"\2\3\2\7\2\4\6\b\n\2\7\3\2\b\t\4\2\n\n\20\20\3\2\6\7\4\2\13\17\22\22\3"+
+		"\2\23\24\29\2\24\3\2\2\2\4\'\3\2\2\2\6,\3\2\2\2\b\63\3\2\2\2\n\65\3\2"+
+		"\2\2\f\r\b\2\1\2\r\25\5\4\3\2\16\25\5\6\4\2\17\25\5\b\5\2\20\21\7\3\2"+
+		"\2\21\22\5\2\2\2\22\23\7\4\2\2\23\25\3\2\2\2\24\f\3\2\2\2\24\16\3\2\2"+
+		"\2\24\17\3\2\2\2\24\20\3\2\2\2\25$\3\2\2\2\26\27\f\n\2\2\27\30\7\21\2"+
+		"\2\30#\5\2\2\n\31\32\f\t\2\2\32\33\t\2\2\2\33#\5\2\2\n\34\35\f\b\2\2\35"+
+		"\36\t\3\2\2\36#\5\2\2\t\37 \f\7\2\2 !\t\4\2\2!#\5\2\2\b\"\26\3\2\2\2\""+
+		"\31\3\2\2\2\"\34\3\2\2\2\"\37\3\2\2\2#&\3\2\2\2$\"\3\2\2\2$%\3\2\2\2%"+
+		"\3\3\2\2\2&$\3\2\2\2\'(\t\5\2\2()\7\3\2\2)*\5\2\2\2*+\7\4\2\2+\5\3\2\2"+
+		"\2,-\t\6\2\2-.\7\3\2\2./\5\2\2\2/\60\7\5\2\2\60\61\5\2\2\2\61\62\7\4\2"+
+		"\2\62\7\3\2\2\2\63\64\7\25\2\2\64\t\3\2\2\2\65\66\7\27\2\2\66\13\3\2\2"+
+		"\2\5\24\"$";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -17,13 +17,6 @@ public class KalkulatorLiczbWymiernychBaseVisitor<T> extends AbstractParseTreeVi
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStart_rule(KalkulatorLiczbWymiernychParser.Start_ruleContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitWyrazenie(KalkulatorLiczbWymiernychParser.WyrazenieContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -31,7 +24,14 @@ public class KalkulatorLiczbWymiernychBaseVisitor<T> extends AbstractParseTreeVi
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOperacja1(KalkulatorLiczbWymiernychParser.Operacja1Context ctx) { return visitChildren(ctx); }
+	@Override public T visitFunkcja1(KalkulatorLiczbWymiernychParser.Funkcja1Context ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFunkcja2(KalkulatorLiczbWymiernychParser.Funkcja2Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
