@@ -37,7 +37,6 @@ wyrazenie:
  Negacja     :   '!';
  Kongruencja :   'k';
  Potega      :   '^';
- Pierwiastek :   'sqrt';
  Max         :   'max';
  Min         :   'min';
 

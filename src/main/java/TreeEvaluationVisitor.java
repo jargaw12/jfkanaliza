@@ -4,20 +4,23 @@ import org.antlr.v4.runtime.tree.TerminalNodeImpl;
 
 public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor {
 
-    public static int nwd(int a, int b) {
+    private static int nwd(int a, int b) {
         if (a != b) {
-            a = Math.abs(a);
-            b = Math.abs(b);
-            do {
-                if (a > b) {
-                    a = a - b;
+            if (a != 0) {
+                a = Math.abs(a);
+                b = Math.abs(b);
+                do {
+                    if (a > b) {
+                        a = a - b;
+                    }
+                    if (a < b) {
+                        b = b - a;
+                    }
                 }
-                if (a < b) {
-                    b = b - a;
-                }
+                while (a != b);
+                return a;
             }
-            while (a != b);
-            return a;
+            else return 1;
         }
         return a;
     }
@@ -65,7 +68,8 @@ public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor 
                 mianownik = 1;
                 break;
             case KalkulatorLiczbWymiernychParser.Zaokraglenie:
-                licznik = Math.round(licznik / mianownik);
+                Math.round((double)licznik / (double)mianownik);
+                licznik = (int) Math.round((double)licznik / (double)mianownik);
                 mianownik = 1;
                 break;
             case KalkulatorLiczbWymiernychParser.Negacja:
