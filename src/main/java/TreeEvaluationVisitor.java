@@ -169,4 +169,13 @@ public class TreeEvaluationVisitor extends KalkulatorLiczbWymiernychBaseVisitor 
         }
         return visitChildren(ctx);
     }
+
+    @Override
+    protected Object aggregateResult(Object aggregate, Object nextResult) {
+        if (aggregate == null) {
+            return nextResult;
+        }
+        if (nextResult == null) return aggregate;
+        return aggregate + "\n" + nextResult;
+    }
 }

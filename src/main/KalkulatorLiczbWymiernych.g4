@@ -22,7 +22,7 @@ wyrazenie:
  //funkcje dwuargumentowe
  funkcja2   :f2 = (Max | Min) '('wyrazenie','wyrazenie')';
 
- liczba: LICZBA;
+ liczba: Liczba;
 
 //oznaczenie poszczególnych operacji
  Dodawanie   :   '+';
