@@ -115,6 +115,14 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_wyrazenie; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof KalkulatorLiczbWymiernychListener ) ((KalkulatorLiczbWymiernychListener)listener).enterWyrazenie(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof KalkulatorLiczbWymiernychListener ) ((KalkulatorLiczbWymiernychListener)listener).exitWyrazenie(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof KalkulatorLiczbWymiernychVisitor ) return ((KalkulatorLiczbWymiernychVisitor<? extends T>)visitor).visitWyrazenie(this);
 			else return visitor.visitChildren(this);
@@ -299,6 +307,14 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_funkcja1; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof KalkulatorLiczbWymiernychListener ) ((KalkulatorLiczbWymiernychListener)listener).enterFunkcja1(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof KalkulatorLiczbWymiernychListener ) ((KalkulatorLiczbWymiernychListener)listener).exitFunkcja1(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof KalkulatorLiczbWymiernychVisitor ) return ((KalkulatorLiczbWymiernychVisitor<? extends T>)visitor).visitFunkcja1(this);
 			else return visitor.visitChildren(this);
@@ -359,6 +375,14 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_funkcja2; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof KalkulatorLiczbWymiernychListener ) ((KalkulatorLiczbWymiernychListener)listener).enterFunkcja2(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof KalkulatorLiczbWymiernychListener ) ((KalkulatorLiczbWymiernychListener)listener).exitFunkcja2(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof KalkulatorLiczbWymiernychVisitor ) return ((KalkulatorLiczbWymiernychVisitor<? extends T>)visitor).visitFunkcja2(this);
 			else return visitor.visitChildren(this);
@@ -412,6 +436,14 @@ public class KalkulatorLiczbWymiernychParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_liczba; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof KalkulatorLiczbWymiernychListener ) ((KalkulatorLiczbWymiernychListener)listener).enterLiczba(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof KalkulatorLiczbWymiernychListener ) ((KalkulatorLiczbWymiernychListener)listener).exitLiczba(this);
+		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof KalkulatorLiczbWymiernychVisitor ) return ((KalkulatorLiczbWymiernychVisitor<? extends T>)visitor).visitLiczba(this);
