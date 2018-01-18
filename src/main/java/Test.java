@@ -77,8 +77,8 @@ public class Test {
             Path path = Paths.get(classPath);
             byte[] bytes = Files.readAllBytes(path);
             ClassReader cr = new ClassReader(bytes);
-            //ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS); // no need to calculate visitMaxs(int maxStack, int maxLocals) arguments
-            ClassWriter cw = new ClassWriter(cr, 0);
+            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS); // no need to calculate visitMaxs(int maxStack, int maxLocals) arguments
+            //ClassWriter cw = new ClassWriter(cr, 0);
             cr.accept(new CompilationClassVisitor(cw, tree), 0);
             bytes = cw.toByteArray();
             Files.write(path, bytes);
